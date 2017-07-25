@@ -1,0 +1,7 @@
+---
+- name: install nfs server on nfs node
+  hosts: nfs-server
+  gather_facts: true
+  user: root
+  roles:
+    - {role: nfs-server}
