@@ -1,0 +1,12 @@
+---
+- name: Create a shared dir
+  file: path=/mnt/nfs/share state=directory mode=777 owner=root group=root
+
+- name: Ensure NFS utilities are installed.
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - nfs-common
+    - nfs-kernel-server
+
+- name: configure /etc/fstab on clients
+  action: mount name=/mnt/nfs/share src=10.20.20.18:/share fstype=nfs state=mounted

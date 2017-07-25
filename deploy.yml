@@ -2,6 +2,13 @@
 - name: install nfs server on nfs node
   hosts: nfs-server
   gather_facts: true
-  user: root
+  remote_user: ubuntu
   roles:
     - {role: nfs-server}
+
+- name: install nfs clients on ambari nodes
+  hosts: nfs-clients
+  gather_facts: true
+  remote_user: root
+  roles:
+    - {role: nfs-client}

@@ -1,15 +1,22 @@
 ---
 - name: Create a shared dir
   file: path=/share state=directory mode=777 owner=root group=root
+  sudo: true
+  sudo_user: root
 
 - name: Ensure NFS utilities are installed.
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - nfs-common
     - nfs-kernel-server
+  sudo: true
+  sudo_user: root
 
 - name: copy /etc/exports
   template: src=exports.j2 dest=/etc/exports owner=root group=root
-
+  sudo: true
+  sudo_user: root
 - name: restart nfs server
   service: name=nfs-kernel-server state=restarted
+  sudo: true
+  sudo_user: root
