@@ -1,0 +1,1 @@
+ansible -i inventory/hosts nfs-clients -m shell -a "cd /mnt/nfs/share/cluster_software; ./provision_cluster_software.sh" -u root --verbose
