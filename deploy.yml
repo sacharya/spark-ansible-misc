@@ -6,9 +6,21 @@
   roles:
     - {role: nfs-server}
 
+#- name: log
+#  hosts: nfs-clients[0]
+#  gather_facts: true
+#  remote_user: root
+#  tasks:
+    #- debug: var=ansible_all_ipv4_addresses
+    #- debug: var=ansible_default_ipv4.address
+#    - debug: var=hostvars[groups["nfs-server"][0]]["ipv4"]["address"]
+
 - name: install nfs clients on ambari nodes
   hosts: nfs-clients
   gather_facts: true
   remote_user: root
+#  vars:
+#    nfs_server: '{{ hostvars[groups["nfs-server"][0]]["ansible_default_ipv4"]["address"] }}'
   roles:
     - {role: nfs-client}
+
